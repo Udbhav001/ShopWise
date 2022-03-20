@@ -1,0 +1,13 @@
+package com.shopwise;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ShopWiseWebParentApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ShopWiseWebParentApplication.class, args);
+	}
+
+}
