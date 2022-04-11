@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+	
+	<title>Home - ShopWise Admin</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/style.css}"/>
+	<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+	<div>
+		<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+			<a class="navbar-brand" th:href="@{/}">
+				<img th:src="@{/images/ShopWiseAdminSmall.png}" />
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse text-center" id="topNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/users}">Users</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/categories}">Categories</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/brands}">Brands</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/products}">Products</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/customers}">Customers</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/shipping}">Shipping</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/orders}">Orders</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/report}">SalesReport</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/articles}">Articles</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/menus}">Menus</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/settings}">Settings</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div>
+		
+		<!--a th:href="@{/users/new}">Create new User</!--a>-->
+		<button type="button" id="createUserBtn" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 10px;">Create new user</button> 
+	</div>
+	
+	<div th:if="${message != null}" class="alert alert-success text-center">
+		[[${message}]]
+	</div>
+	
+	<div>
+		<table class="table table-bordered table-hover table-striped table-responsive-xL">
+			<thead class="thead-dark text-center">
+				<tr>
+					<th>User ID</th>
+					<th>Photos</th>
+					<th>Email</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Roles</th>
+					<th>Enabled</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody class="text-center">
+				<tr th:each="user : ${listUsers}">
+					<td>[[${user.id}]]</td>
+					<td><span class="fas fa-portrait fa-2x icon-black"></span></td>
+					<td>[[${user.email}]]</td>
+					<td>[[${user.firstName}]]</td>
+					<td>[[${user.lastName}]]</td>
+					<td>[[${user.roles}]]</td>
+					<td>
+					<span th:if="${user.enabled} == true" class="fas fa-check-circle icon-green" href=""></span>
+					<span th:if="${user.enabled} == false" class="fas fa-circle-xmark icon-red" href=""></a>
+					</td>
+					<td>
+					<a class="fas fa-edit fa-1x icon-black" th:href="@{'/users/edit/' + ${user.id}}" title="Edit this user"></a>
+					&nbsp;
+					<a class="fas fa-trash fa-1x icon-red link-delete" th:href="@{'/users/delete/' + ${user.id}}" title="Delete this user"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table >
+	</div>
+	<div class="text-center">
+		<p>ShopWise Control Panel  - Copyright &copy; ShopWise</p>
+	</div >
+</div>
+
+</body>
+<script>
+	$(document).ready(function(){
+		$("#createUserBtn").on("click" , function(){
+			window.location = "[[@{/users/new}]]";
+		});
+	});
+	
+	$(document).ready(function(){
+		$(".link-delete").on("click",function(e){
+			e.preventDefault();
+			alert($(this).attr("href"));
+		});
+	});
+</script>
+</html>

@@ -1,0 +1,10 @@
+package com.shopwise.admin.user;
+
+public class UsernotFouldException extends Exception {
+
+	public UsernotFouldException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+
+}
